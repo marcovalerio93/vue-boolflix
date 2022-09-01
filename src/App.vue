@@ -1,15 +1,16 @@
 <template>
   <div id="app">
-    <MyHeader @search="searching"/>
-    <MyMain :film_list="film_list"/>
+    <MyHeader @search="textToSearch"/>
+    <MyMain :list="list"/>
   </div>
 </template>
 
 <script>
 
-import axios from 'axios';
+
 import MyHeader from './components/MyHeader.vue';
 import MyMain from './components/MyMain.vue';
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -20,23 +21,23 @@ export default {
 
   data() {
     return {
-      apiUrl:'https://api.themoviedb.org/3/',
+      apiUrl:'https://api.themoviedb.org/3',
       apiKey:'24b248d3ec557ff42f3aac3b5261990e',
       lenguage: 'it-IT',
-      list:[],
+      list:[]
     }
   },
 
 
   methods: {
-    searching(textSearched) {
-      axios.get(this.apiUrl + '/search/movie?api_key=' + this.apiKey + '&language='  + this.lenguage + '&query=' + textSearched)
+    textToSearch(textSearced) {
+      axios.get(this.apiUrl + '/search/movie?api_key=' + this.apiKey + '&language='+ this.language + '&query=' + textSearced)
       .then(res => {
-        this.film_list = res.data.results;
+        this.list = res.data.results;
       })
-      .catch(err => {
-        console.log(err);
-      })
+      // .catch(err => {
+      //   console.log(err);
+      // })
 
     },
   }
@@ -46,12 +47,12 @@ export default {
 <style lang="scss">
 
 // rest rules
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
-}
+// * {
+//   padding: 0;
+//   margin: 0;
+//   box-sizing: border-box;
+//   font-family: sans-serif;
+// }
 
 
 
