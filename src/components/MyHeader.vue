@@ -2,7 +2,11 @@
     <div class="bg">
         <div class="d-flex">
             <h1>BOOLFLIX</h1>
-            <input type="text"/>
+            <div>
+                <input type="text" placeholder="search"/>
+                <button @click="$emit('search', searchByText)">Cerca</button>
+            </div>
+            
         </div>
     </div>  
 </template>
@@ -10,6 +14,12 @@
 <script>
 export default {
     name:"MyHeader",
+    data () {
+        return{
+            searchByText: ''
+        }
+    }
+    
 
 }
 </script>
@@ -29,14 +39,13 @@ export default {
 
             h1{
                 color: red;
+                margin-top: 15px;
             }
             input{
-                width: 20%;
+                width: 80%;
                 height: 40%;
-                margin-top: 25px;
+                margin-top: 15px;
             }
         }
-    
-
 
 </style>
