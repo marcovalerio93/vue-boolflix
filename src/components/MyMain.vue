@@ -2,11 +2,12 @@
   <div>
     <ul>
       <li>Titolo - lingua - voto</li>
-      <li v-for="(item,index) in list" :key="index">
-        {{item.title}} -
-        {{item.originl_title}} -
-        {{item.original_lenguage}} -
-        {{item.vote_avarage}}
+
+      <li v-for="(film, index) in film_list" :key="index">
+        {{film.title}} -
+        {{film.original_title}} -
+        {{film.original_lenguage}} -
+        {{film.vote_avarage}}
       </li>
 
     </ul>
@@ -17,8 +18,8 @@
 <script>
 export default {
     name:"MyMain",
-    props:{
-      list: Array
+    props: {
+      film_list: Array
     }
 }
 </script>
