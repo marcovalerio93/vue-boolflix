@@ -51,7 +51,7 @@ export default {
           console.log(err);
         })
     },
-    geSeries(paramsObj) {
+    getSeries(paramsObj) {
         axios.get(this.apiUrl + '/search/tv', paramsObj )
         .then(res => {
           this.s_list = res.data.results;
