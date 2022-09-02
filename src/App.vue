@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <MyHeader @search="textToSearch"/>
-    <MyMain :list="list"/>
+    <MyMain :f_list="f_list"/>
   </div>
 </template>
 
@@ -24,7 +24,8 @@ export default {
       apiUrl:'https://api.themoviedb.org/3',
       apiKey:'24b248d3ec557ff42f3aac3b5261990e',
       lenguage: 'it-IT',
-      list:[]
+      f_list:[],
+      s_list:[]
     }
   },
 
@@ -33,13 +34,21 @@ export default {
     textToSearch(textSearced) {
       axios.get(this.apiUrl + '/search/movie?api_key=' + this.apiKey + '&language='+ this.language + '&query=' + textSearced)
       .then(res => {
-        this.list = res.data.results;
+        this.f_list = res.data.results;
       })
-      // .catch(err => {
-      //   console.log(err);
-      // })
-
+      .catch(err => {
+      console.log(err);
+      })
+      axios.get(this.apiUrl + '/search/tv?api_key=' + this.apiKey + '&language='+ this.language + '&query=' + textSearced)
+      .then(res => {
+        this.s_list = res.data.results;
+      })
+      .catch(err => {
+      console.log(err);
+      })
     },
+    
+
   }
 }
 </script>
