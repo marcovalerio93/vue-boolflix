@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <MyHeader @search="textToSearch"/>
-    <MyMain :f_list="f_list"/>
+    <MyMain :f_list="f_list" :s_list="s_list"/>
   </div>
 </template>
 
@@ -32,36 +32,47 @@ export default {
 
   methods: {
     textToSearch(textSearced) {
-      axios.get(this.apiUrl + '/search/movie?api_key=' + this.apiKey + '&language='+ this.language + '&query=' + textSearced)
-      .then(res => {
-        this.f_list = res.data.results;
-      })
-      .catch(err => {
-      console.log(err);
-      })
-      axios.get(this.apiUrl + '/search/tv?api_key=' + this.apiKey + '&language='+ this.language + '&query=' + textSearced)
-      .then(res => {
-        this.s_list = res.data.results;
-      })
-      .catch(err => {
-      console.log(err);
-      })
+      const paramsObj = {
+          params: {
+            api_key: this.apiKey,
+            language: this.language,
+            query: textSearced
+          }
+        };
+      this.getMovies(paramsObj);
+      this.getSeries(paramsObj);
     },
-    
-
+    getMovies(paramsObj) {
+        axios.get(this.apiUrl + '/search/movie', paramsObj)
+        .then(res => {
+          this.f_list = res.data.results;
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    },
+    geSeries(paramsObj) {
+        axios.get(this.apiUrl + '/search/tv', paramsObj )
+        .then(res => {
+          this.s_list = res.data.results;
+        })
+        .catch(err => {
+        console.log(err);
+        })
+      }
   }
 }
 </script>
 
 <style lang="scss">
 
-// rest rules
-// * {
-//   padding: 0;
-//   margin: 0;
-//   box-sizing: border-box;
-//   font-family: sans-serif;
-// }
+rest rules
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
 
 
 
